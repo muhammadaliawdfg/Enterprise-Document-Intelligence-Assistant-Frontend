@@ -11,7 +11,7 @@ export const uploadDocument = async (file: File) => {
   formData.append('file', file);
 
   try {
-    const response = await api.post('/upload-doc', formData, {
+    const response = await api.post('/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -28,22 +28,12 @@ export const uploadDocument = async (file: File) => {
   }
 };
 
-export const sendMessage = async (question: string) => {
+export const sendMessage = async (question: string, top_k: number = 3) => {
   try {
-    const response = await api.post('/chat', { question });
+    const response = await api.post('/query', { query: question, top_k });
     return response.data;
   } catch (error) {
     console.error('Error sending message:', error);
-    throw error;
-  }
-};
-
-export const getDocuments = async () => {
-  try {
-    const response = await api.get('/documents');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching documents:', error);
     throw error;
   }
 };
