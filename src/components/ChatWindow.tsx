@@ -59,6 +59,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ documentCount }) => {
         content: response.answer,
         timestamp: new Date(),
         sources: response.sources,
+        
       };
       
       setMessages(prev => [...prev, assistantMessage]);

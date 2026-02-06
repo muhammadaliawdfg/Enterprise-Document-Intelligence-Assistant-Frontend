@@ -13,7 +13,7 @@ const Dashboard: React.FC = () => {
     // Assuming the API returns document info
     const newDoc: Document = {
       id: doc.id || Date.now().toString(),
-      name: doc.name || 'Unknown Document',
+      name: doc.filename || 'Unknown Document',
       status: 'ready',
       uploadDate: new Date().toISOString(),
       pages: doc.pages || 0

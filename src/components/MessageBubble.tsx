@@ -1,7 +1,9 @@
+// MessageBubble.tsx
 import React from 'react';
 import { User, Bot } from 'lucide-react';
 import { Message } from '../types';
 import SourceCitations from './SourceCitations';
+import ReactMarkdown from 'react-markdown';
 
 interface MessageBubbleProps {
   message: Message;
@@ -20,6 +22,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         }`}
       >
         <div className="flex">
+          {/* Assistant Icon */}
           {!isUser && (
             <div className="mr-3 mt-1 flex-shrink-0">
               <div className="bg-blue-100 rounded-full p-2">
@@ -27,18 +30,28 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
               </div>
             </div>
           )}
+
+          {/* Message Content */}
           <div className="flex-1 min-w-0">
+            {/* Assistant Name */}
             {!isUser && (
               <div className="font-semibold text-gray-900 mb-1 flex items-center">
                 <span>EDIA Assistant</span>
               </div>
             )}
-            <div className="whitespace-pre-wrap text-gray-800">{message.content}</div>
 
+            {/* Markdown Content */}
+            <div className="whitespace-pre-wrap text-gray-800">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
+
+            {/* Source Citations */}
             {!isUser && message.sources && message.sources.length > 0 && (
               <SourceCitations sources={message.sources} />
             )}
           </div>
+
+          {/* User Icon */}
           {isUser && (
             <div className="ml-3 mt-1 flex-shrink-0">
               <div className="bg-gray-100 rounded-full p-2">
